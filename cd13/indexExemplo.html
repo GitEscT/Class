@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Classes</title>
+</head>
+<body>
+    <h1>Exemplo de uso de Classes em JS</h1>
+
+    <div class="form-container">
+        <input type="text" placeholder="Nome" id="nome" />
+        <input type="number" placeholder="Idade" id="idade" />
+        <button onclick="adicionarPessoa()">Adicionar Pessoa</button>
+    </div>
+    <ul id="listaPessoas"></ul>
+
+    <script>
+
+        class Pessoa {
+            constructor(nome, idade) {
+                this.nome = nome;
+                this.idade = idade;
+            }
+
+            toString() {
+                return '${this.nome} tem ${this.idade} anos.'
+            }
+        }
+
+        const pessoas = {}
+
+        function adicionarPessoa() {
+            const nomeInput =document.getElementById('nome')
+            const idadeInput = documentElementById('idade')
+
+            const nome = nomeInput.value
+            const idade = idadeInput.value
+
+            if (nome && idade) {
+                const novaPessoa = new Pessoa(nome, idade)
+                pessoas.push(novaPessoa)
+                atualizarListaPessoas()
+                nomeInput.value=''
+                idadeInput.value=''
+            } else {
+                alert('Preencha o nome e a idade com valores válidos')
+            }
+        }
+         
+        function atualizarListaPessoas() {
+            const listaPessoas = documentElementById('listaPessoas')
+            listaPessoas.innerHTML = ''
+            pessoas.forEach(pessoa => {
+                const li = document.createElement('li')
+                li.innerHTML = pessoa.toString()
+                listaPessoas.appendChild(li)             
+            })
+        }
+        
+    </script>
+</body>
+</html>

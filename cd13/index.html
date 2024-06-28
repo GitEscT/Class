@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Animais</title>
+</head>
+<body>
+    <h1>Exemplo de uso de Classes em JS</h1>
+
+    <div class="form-container">
+        <input type="text" placeholder="Nome do Animal" id="nome" />
+        <input type="text" placeholder="Espécie" id="especie" />
+        <input type="number" placeholder="Peso" id="peso" />
+        <button onclick="adicionarAnimal()">Adicionar Animal</button>
+    </div>
+    <ul id="listaAnimais"></ul>
+
+    <script>
+        class Animal {
+            constructor(nome, especie, peso) {
+                this.nome = nome;
+                this.especie = especie;
+                this.peso = peso;
+            }
+
+            toString() {
+                return `${this.nome} é da espécie ${this.especie} e pesa ${this.peso} kg.`
+            }
+        }
+
+        const animais = []
+
+        function adicionarAnimal() {
+            const nomeInput = document.getElementById('nome')
+            const especieInput = document.getElementById('especie')
+            const pesoInput = document.getElementById('peso')
+
+            const nome = nomeInput.value
+            const especie = especieInput.value
+            const peso = pesoInput.value
+
+            if (nome && especie && peso) {
+                const novoAnimal = new Animal(nome, especie, peso)
+                animais.push(novoAnimal)
+                atualizarListaAnimais()
+                nomeInput.value = ''
+                especieInput.value = ''
+                pesoInput.value = ''
+            } else {
+                alert('Preencha com valores válidos');
+            }
+        }
+
+        function atualizarListaAnimais() {
+            const listaAnimais = document.getElementById('listaAnimais');
+            listaAnimais.innerHTML = ''
+            animais.forEach(animal => {
+                const li = document.createElement('li')
+                li.innerHTML = animal.toString()
+                listaAnimais.appendChild(li)
+            })
+        }
+
+    </script>
+</body>
+</html>
